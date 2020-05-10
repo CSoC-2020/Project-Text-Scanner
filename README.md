@@ -21,10 +21,9 @@ Take—In next window first it will ask you for image or video if you choose vid
  
  Architecture​ :  Libraries/packages—Tkenter (for making gui ), opencv(for image processing), pytesseract(for extracting text form img and as for the video first we break it into frames then extract text from each). 
  
- Application ​:# video analysis and retrieval system                     
- #  video security and surveillance    
- #   information retrieval system    
- #   multimedia systems 
- 
+ Application ​:* video analysis and retrieval system                     
+* video security and surveillance    
+* information retrieval system    
+* multimedia systems 
  -@AJAY singh bhandari. 
  
