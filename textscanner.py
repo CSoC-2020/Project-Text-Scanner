@@ -1,5 +1,8 @@
+from PyPDF2 import PdfFileReader,PdfFileWriter
+import os
 import cv2
 from tkinter import *
+from tkinter.filedialog import *
 import pytesseract
 from PIL import Image
 from tkinter import simpledialog
@@ -7,14 +10,42 @@ from tkinter import simpledialog
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 
 def main_scan():
-    a = simpledialog.askstring(title="import", prompt="location of image : ")
-    a_name=a.split(".")
-    img = Image.open(a)
-    txt = pytesseract.image_to_string(img)
-    print(txt)
-    b = f" {a_name[0]}.txt"
-    with open(b, "w") as f:
-        f.write(txt)
+    a = askopenfilename(title="import")
+    ext=os.path.splitext(a)[1]     # it split extension from file location
+    #print(" hello ",ext)
+    a_name = a.split("/")[::-1]
+    a_name = a_name[0].split(".")
+
+    #--- extracting from image---
+
+    if ext==".png" or ext==".jpg":
+        img = Image.open(a)
+        txt = pytesseract.image_to_string(img)
+        print(txt)
+        b = f" {a_name[0]}.txt"
+        with open(b, "w") as f:
+            f.write(txt)
+
+    #---extracting from PDF file
+
+    elif ext==".pdf":
+        pdf=PdfFileReader(a)
+        with open(f"{a_name[0]}.txt", "w") as f:
+            for page_num in range(pdf.numPages):
+                print(f"page : {page_num}")
+                pageobj = pdf.getPage(page_num)
+
+                try:
+                    txt = pageobj.extractText()
+                    print(''.center(100, "-"))
+                except:
+                    pass
+                else:
+                    f.write(f"page {page_num + 1}\n")
+                    f.write(" ".center(100, "-"))
+                    f.write(txt)
+            f.close()
+
 
 
 
@@ -70,6 +101,5 @@ def main_screen():
     Label(text=5* "\n").pack()
     Label(text="Tip : use SPACE BAR to take picture and ESC to close camera.").pack()
     screen.mainloop()
-
 
 main_screen()
