@@ -83,8 +83,31 @@ def Import():
         b = f"extracted_txt\{a_name[0]}.txt"
         with open(b, "w") as f:
             f.write(txt)
+            
+    #---code for extracting text from hand written text using cloud vision api.
+    
+     import os, io
+     from google.cloud import vision
+     from google.cloud.vision import types
+     import pandas as pd
 
+     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'My First Project-d6eeb7b18988.json'
+     client = vision.ImageAnnotatorClient()
 
+     FOLDER_PATH = r'C:\Users\Jyoti\Pictures\qoutes'
+     IMAGE_FILE = 'black.jpg'
+     FILE_PATH = os.path.join(FOLDER_PATH, IMAGE_FILE)
+
+     with io.open(FILE_PATH, 'rb') as image_file:
+          content = image_file.read()
+
+     image = vision.types.Image(content=content)
+     response = client.document_text_detection(image=image)
+
+     docText = response.full_text_annotation.text
+     print(docText)
+
+   
 
     # ----- extraction from pdf file
 
@@ -265,6 +288,7 @@ def main_screen():
         # if not created then raise error
     except OSError:
         print('Error: first create dir for text file extracted_txt manually')
+        
 
     # making GUI
     global screen
