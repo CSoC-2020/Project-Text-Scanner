@@ -5,9 +5,11 @@ from tkinter import *
 from tkinter.filedialog import *
 import pytesseract
 from PIL import Image
+from PIL import Image,ImageTk
+from tkinter import font as tkFont
 from tkinter import simpledialog
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd =r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 def Import():
     a = askopenfilename(title="import")
@@ -243,8 +245,12 @@ def Video():
 def Take():
     screen1 = Toplevel(screen)
     screen1.geometry("800x800")
-    screen1.title("Take")
+    screen1.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
+    img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
+    helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
+    Label(screen1, image=img).place(relwidth=1, relheight=1)
     Label(screen1,text="choose one ").pack()
+    screen1.title("Take")
     Label(screen1,text=10*"\n").pack()
     Button(screen1,text="Picture",bg="grey",height="4",width="45",command=Picture).pack()
     Label(screen1,text=" Press space bar to take pictures and ESC to exit  ").pack()
@@ -269,13 +275,19 @@ def main_screen():
     # making GUI
     global screen
     screen = Tk()
+    screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
     screen.geometry("800x800")
+    img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
+    helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
+    Label(screen, image=img).place(relwidth=1, relheight=1)
     screen.title("TEXT SCANNER")
-    Label(text="Pick your option").pack()
-    Label(text=10* "\n ").pack()
-    Button(text="Import", bg="grey", height="4", width="45", command=Import).pack()
-    Label(text=5*"\n ").pack()
-    Button(text="Take", bg="grey", height="4", width="45", command=Take).pack()
+    b1 = Button(text="IMPORT", bg="grey", height="2", width="30", font=helv36, command=Import).pack(expand=YES)
+    b2 = Button(text="TAKE", bg="grey", height="2", width="30", font=helv36, command=Take).pack()
+
+    Label(text="Tip : use SPACE BAR to take picture and ESC to close camera.", font="times 18 bold", bg="grey12",
+        fg="white").pack(expand=YES)
+    b3 = Button(screen, text="QUIT", bg='grey', height="2", width="30", font=helv36, command=screen.quit).pack(
+        expand=YES)
     screen.mainloop()
 
 main_screen()
