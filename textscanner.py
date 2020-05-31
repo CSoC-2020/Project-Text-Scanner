@@ -254,7 +254,7 @@ def Take():
     screen1.title("Take")
     Label(screen1,text="choose one ",font="times 18 bold", bg="grey12",fg="white").pack()
     Button(screen1,text="Picture",bg="grey",height="4",width="45",font=helv36,command=Picture).pack()
-    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expaand=YES)
+    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expand=YES)
     Label(screen1,text="Tips -- Press ESC button to exit and SPACE to take picture",font="helv36", bg="grey12",
         fg="white").pack()
 
