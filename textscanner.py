@@ -244,17 +244,15 @@ def Video():
 
 def Take():
     screen1 = Toplevel(screen)
-    screen1.geometry("800x800")
+    screen1.geometry("700x700")
     screen1.configure(bg="black")
     helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
     #window icon
     screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
-    #img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
-    #Label(screen, image=img).place(relwidth=1, relheight=1)
     screen1.title("Take")
     Label(screen1,text="choose one ",font="times 18 bold", bg="grey12",fg="white").pack()
     Button(screen1,text="Picture",bg="grey",height="4",width="45",font=helv36,command=Picture).pack()
-    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expand=YES)
+    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expaand=YES)
     Label(screen1,text="Tips -- Press ESC button to exit and SPACE to take picture",font="helv36", bg="grey12",
         fg="white").pack()
 
@@ -274,7 +272,7 @@ def main_screen():
     # making GUI
     global screen
     screen = Tk()
-    screen.geometry("800x800")
+    screen.geometry("700x700")
     #window icon
     screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
     img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
@@ -284,7 +282,7 @@ def main_screen():
     Label(text="Pick your option",font="helv36", bg="grey12",fg="white").pack()
     Button(text="Import", bg="grey", height="4", width="45",font=helv36, command=Import).pack()
     Button(text="Take", bg="grey", height="4", width="45",font=helv36, command=Take).pack(expand=YES)
+
     screen.mainloop()
 
 main_screen()
-
