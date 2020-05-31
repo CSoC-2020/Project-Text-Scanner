@@ -245,19 +245,18 @@ def Video():
 def Take():
     screen1 = Toplevel(screen)
     screen1.geometry("800x800")
-    screen1.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
-    img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
+    screen1.configure(bg="black")
     helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
-    Label(screen1, image=img).place(relwidth=1, relheight=1)
-    Label(screen1,text="choose one ").pack()
+    #window icon
+    screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
+    #img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
+    #Label(screen, image=img).place(relwidth=1, relheight=1)
     screen1.title("Take")
-    Label(screen1,text=10*"\n").pack()
-    Button(screen1,text="Picture",bg="grey",height="4",width="45",command=Picture).pack()
-    Label(screen1,text=" Press space bar to take pictures and ESC to exit  ").pack()
-    Label(screen1,text=5*"\n").pack()
-    Button(screen1,text="Video",bg="grey",height="4",width="45",command=Video).pack()
-    Label(screen1,text="Press ESC button to exit from video").pack()
-
+    Label(screen1,text="choose one ",font="times 18 bold", bg="grey12",fg="white").pack()
+    Button(screen1,text="Picture",bg="grey",height="4",width="45",font=helv36,command=Picture).pack()
+    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expaand=YES)
+    Label(screen1,text="Tips -- Press ESC button to exit and SPACE to take picture",font="helv36", bg="grey12",
+        fg="white").pack()
 
 
 def main_screen():
@@ -275,19 +274,16 @@ def main_screen():
     # making GUI
     global screen
     screen = Tk()
-    screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
     screen.geometry("800x800")
+    #window icon
+    screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
     img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
-    helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
     Label(screen, image=img).place(relwidth=1, relheight=1)
+    helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
     screen.title("TEXT SCANNER")
-    b1 = Button(text="IMPORT", bg="grey", height="2", width="30", font=helv36, command=Import).pack(expand=YES)
-    b2 = Button(text="TAKE", bg="grey", height="2", width="30", font=helv36, command=Take).pack()
-
-    Label(text="Tip : use SPACE BAR to take picture and ESC to close camera.", font="times 18 bold", bg="grey12",
-        fg="white").pack(expand=YES)
-    b3 = Button(screen, text="QUIT", bg='grey', height="2", width="30", font=helv36, command=screen.quit).pack(
-        expand=YES)
+    Label(text="Pick your option",font="helv36", bg="grey12",fg="white").pack()
+    Button(text="Import", bg="grey", height="4", width="45",font=helv36, command=Import).pack()
+    Button(text="Take", bg="grey", height="4", width="45",font=helv36, command=Take).pack(expand=YES)
     screen.mainloop()
 
 main_screen()
