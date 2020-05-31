@@ -5,9 +5,11 @@ from tkinter import *
 from tkinter.filedialog import *
 import pytesseract
 from PIL import Image
+from PIL import Image,ImageTk
+from tkinter import font as tkFont
 from tkinter import simpledialog
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd =r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 def Import():
     a = askopenfilename(title="import")
@@ -83,31 +85,8 @@ def Import():
         b = f"extracted_txt\{a_name[0]}.txt"
         with open(b, "w") as f:
             f.write(txt)
-            
-    #---code for extracting text from hand written text using cloud vision api.
-    
-     import os, io
-     from google.cloud import vision
-     from google.cloud.vision import types
-     import pandas as pd
 
-     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'My First Project-d6eeb7b18988.json'
-     client = vision.ImageAnnotatorClient()
 
-     FOLDER_PATH = r'C:\Users\Jyoti\Pictures\qoutes'
-     IMAGE_FILE = 'black.jpg'
-     FILE_PATH = os.path.join(FOLDER_PATH, IMAGE_FILE)
-
-     with io.open(FILE_PATH, 'rb') as image_file:
-          content = image_file.read()
-
-     image = vision.types.Image(content=content)
-     response = client.document_text_detection(image=image)
-
-     docText = response.full_text_annotation.text
-     print(docText)
-
-   
 
     # ----- extraction from pdf file
 
@@ -266,15 +245,17 @@ def Video():
 def Take():
     screen1 = Toplevel(screen)
     screen1.geometry("800x800")
+    screen1.configure(bg="black")
+    helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
+    #window icon
+    screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
+    
     screen1.title("Take")
-    Label(screen1,text="choose one ").pack()
-    Label(screen1,text=10*"\n").pack()
-    Button(screen1,text="Picture",bg="grey",height="4",width="45",command=Picture).pack()
-    Label(screen1,text=" Press space bar to take pictures and ESC to exit  ").pack()
-    Label(screen1,text=5*"\n").pack()
-    Button(screen1,text="Video",bg="grey",height="4",width="45",command=Video).pack()
-    Label(screen1,text="Press ESC button to exit from video").pack()
-
+    Label(screen1,text="choose one ",font="times 18 bold", bg="grey12",fg="white").pack()
+    Button(screen1,text="Picture",bg="grey",height="4",width="45",font=helv36,command=Picture).pack()
+    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expaand=YES)
+    Label(screen1,text="Tips -- Press ESC button to exit and SPACE to take picture",font="helv36", bg="grey12",
+        fg="white").pack()
 
 
 def main_screen():
@@ -288,19 +269,40 @@ def main_screen():
         # if not created then raise error
     except OSError:
         print('Error: first create dir for text file extracted_txt manually')
-        
 
     # making GUI
     global screen
     screen = Tk()
     screen.geometry("800x800")
+    #window icon
+    screen.iconbitmap(r"C:\Users\Jyoti\Downloads\doodle.jpg")
+    img = ImageTk.PhotoImage(Image.open(r"C:\Users\Jyoti\Downloads\doodle.jpg"))
+
+    Label(screen, image=img).place(relwidth=1, relheight=1)
+    helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
     screen.title("TEXT SCANNER")
-    Label(text="Pick your option").pack()
-    Label(text=10* "\n ").pack()
-    Button(text="Import", bg="grey", height="4", width="45", command=Import).pack()
-    Label(text=5*"\n ").pack()
-    Button(text="Take", bg="grey", height="4", width="45", command=Take).pack()
+    Label(text="Pick your option",font="helv36", bg="grey12",fg="white").pack()
+
+    Label( text = 'Import', font =('Verdana', 15)).pack( pady = (20,5))
+    photo = PhotoImage(file = r"C:\Users\Jyoti\Downloads\1.png") 
+    Button( text = 'IMport', height="70", width="100", image = photo, command=Import).pack()
+
+    Label( text = 'Take Video', font =('Verdana', 15)).pack( pady = (20,5))
+    photo1 = PhotoImage(file = r"C:\Users\Jyoti\Downloads\3.png") 
+    Button( text = 'Take', height="70", width="100",image = photo1, command=Video).pack()
+
+    Label( text = 'Take Picture', font =('Verdana', 15)).pack( pady = (20,5))
+    photo2 = PhotoImage(file = r"C:\Users\Jyoti\Downloads\2.png") 
+    Button( text = 'Take', height="70", width="100",image = photo2, command=Picture).pack()
+
+
+    
+    Button( text = "Quit", width= "8", height="2", command=screen.quit).pack(pady = 100)
+   
+    Label(text="Tips -- Press ESC button to exit and SPACE to take picture",font="helv36", bg="grey12",
+        fg="white").pack()
+    #screen.geometry("300x250+300+300")
+    
     screen.mainloop()
 
 main_screen()
-
