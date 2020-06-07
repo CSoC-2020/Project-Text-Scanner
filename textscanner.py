@@ -244,15 +244,17 @@ def Video():
 
 def Take():
     screen1 = Toplevel(screen)
-    screen1.geometry("700x700")
+    screen1.geometry("800x800")
     screen1.configure(bg="black")
     helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
     #window icon
-    screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
+    screen.iconbitmap(r"Hopstarter-Soft-Scraps-Document-Text.ico")
+    #img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
+    #Label(screen, image=img).place(relwidth=1, relheight=1)
     screen1.title("Take")
     Label(screen1,text="choose one ",font="times 18 bold", bg="grey12",fg="white").pack()
     Button(screen1,text="Picture",bg="grey",height="4",width="45",font=helv36,command=Picture).pack()
-    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expaand=YES)
+    Button(screen1,text="Video",bg="grey",height="4",width="45",font=helv36,command=Video).pack(expand=YES)
     Label(screen1,text="Tips -- Press ESC button to exit and SPACE to take picture",font="helv36", bg="grey12",
         fg="white").pack()
 
@@ -272,17 +274,16 @@ def main_screen():
     # making GUI
     global screen
     screen = Tk()
-    screen.geometry("700x700")
+    screen.geometry("800x800")
     #window icon
-    screen.iconbitmap(r"C:\Users\Karmveer\Downloads\Hopstarter-Soft-Scraps-Document-Text.ico")
-    img = ImageTk.PhotoImage(Image.open(r"C:\Users\Karmveer\Downloads\doodle.jpg"))
-    Label(screen, image=img).place(relwidth=1, relheight=1)
+    screen.iconbitmap(r"Hopstarter-Soft-Scraps-Document-Text.ico")
+    img = ImageTk.PhotoImage(Image.open(r"pic.jpg"))
+    Label(screen, image=img).place(x=0,y=0,relwidth=1, relheight=1)
     helv36 = tkFont.Font(family='Helvetica', size=10, weight='bold')
     screen.title("TEXT SCANNER")
-    Label(text="Pick your option",font="helv36", bg="grey12",fg="white").pack()
-    Button(text="Import", bg="grey", height="4", width="45",font=helv36, command=Import).pack()
-    Button(text="Take", bg="grey", height="4", width="45",font=helv36, command=Take).pack(expand=YES)
-
+    Label(text="Pick your option",font="helv36",fg="black").pack()
+    Button(text="Import",height="4", width="45",font=helv36, command=Import).pack()
+    Button(text="Take",  height="4", width="45",font=helv36, command=Take).pack(expand=YES)
     screen.mainloop()
 
 main_screen()
